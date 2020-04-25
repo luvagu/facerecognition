@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Server files
+
+See them at [facerecognition-api](https://github.com/luiavag/facerecognition-api)
+
 ## Available Scripts
 
 In the project directory, you can run:
