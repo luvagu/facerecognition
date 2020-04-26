@@ -91,7 +91,9 @@ class App extends Component {
   }
 
   onInputChange = (event) => {
-    this.setState({ input: event.target.value });
+    if (event.target.value !== null || event.target.value !== '') {
+      this.setState({ input: event.target.value });
+    }
   }
 
   onImageSubmit = () => {
