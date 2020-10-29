@@ -11,6 +11,7 @@ import ProfileModal from './components/ProfileModal/ProfileModal';
 import ViewProfile from './components/Profile/ViewProfile';
 import './App.css';
 
+// Backend URL
 // Use this url for development
 // const serverUrl = 'http://localhost:3000/';
 // Use this url for production 
