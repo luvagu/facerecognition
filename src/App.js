@@ -11,8 +11,10 @@ import ProfileModal from './components/ProfileModal/ProfileModal';
 import ViewProfile from './components/Profile/ViewProfile';
 import './App.css';
 
-const serverUrl = 'http://localhost:3000/';
-// Use this url for production https://evening-refuge-41656.herokuapp.com/
+// Use this url for development
+// const serverUrl = 'http://localhost:3000/';
+// Use this url for production 
+const serverUrl = 'https://evening-refuge-41656.herokuapp.com/'
 // Use this url for local machine testing: http://localhost:3000/
 // or point to current server localhost url/port
 
