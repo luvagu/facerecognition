@@ -1,4 +1,5 @@
 import React from 'react';
+import './Signin.css';
 
 class Signin extends React.Component {
     constructor(props) {
@@ -17,24 +18,39 @@ class Signin extends React.Component {
         this.setState({ signInPassword: event.target.value });
     }
 
+    saveAuthTokenInSession = (token) => {
+        //window.sessionStorage.setItem('token', token);
+        window.localStorage.setItem('token', token);
+    }
+
     onSubmitSignIn = () => {
-        // console.log(this.state);
         fetch(`${this.props.serverUrl}signin`, {
             method: 'post',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: this.state.signInEmail,
                 password: this.state.signInPassword
             })
         })
-        .then(respose => respose.json())
-        .then(user => {
-            if (user.id) {
-                console.log('Login success.');
-                this.props.loadUser(user);
-                this.props.onRouteChange('home');
-            } else {
-                console.log('Login error.');
+        .then(resp => resp.json())
+        .then(data => {
+            if (data.userId && data.success === 'true') {
+                this.saveAuthTokenInSession(data.token)
+                fetch(`${this.props.serverUrl}profile/${data.userId}`, {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': data.token
+                    }
+                })
+                .then(resp => resp.json())
+                .then(user => {
+                    if (user && user.email) {
+                        this.props.loadUser(user);
+                        this.props.onRouteChange('home');
+                    }
+                })
+                .catch(console.log)
             }
         })
     }
@@ -51,7 +67,7 @@ class Signin extends React.Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                                 <input 
                                     onChange={this.onEmailChange}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black" 
                                     type="email" 
                                     name="email-address" 
                                     id="email-address" />
@@ -60,7 +76,7 @@ class Signin extends React.Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                                 <input 
                                     onChange={this.onPasswordChange}
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black" 
                                     type="password" 
                                     name="password" 
                                     id="password" />

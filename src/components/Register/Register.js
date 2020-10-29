@@ -1,4 +1,5 @@
 import React from 'react';
+import './Register.css';
 
 class Register extends React.Component {
     constructor(props) {
@@ -33,16 +34,16 @@ class Register extends React.Component {
                 password: this.state.password
             })
         })
-            .then(respose => respose.json())
-            .then(user => {
-                if (user.id) {
-                    console.log('Registration success.');
-                    this.props.loadUser(user);
-                    this.props.onRouteChange('home');
-                } else {
-                    console.log('Registration error.');
-                }
-            })
+        .then(resp => resp.json())
+        .then(user => {
+            if (user.id) {
+                //console.log('Registration success.');
+                this.props.loadUser(user);
+                this.props.onRouteChange('home');
+            } else {
+                console.log('Registration error.');
+            }
+        })
     }
 
     render() {
@@ -57,7 +58,7 @@ class Register extends React.Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
                                 <input 
                                     onChange={this.onNameChange}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black" 
                                     type="text" 
                                     name="name" 
                                     id="name" />
@@ -66,7 +67,7 @@ class Register extends React.Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                                 <input 
                                     onChange={this.onEmailChange}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black" 
                                     type="email" 
                                     name="email-address" 
                                     id="email-address" />
@@ -75,7 +76,7 @@ class Register extends React.Component {
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                                 <input 
                                     onChange={this.onPasswordChange}
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black" 
                                     type="password"
                                     name="password" 
                                     id="password" />
@@ -88,9 +89,6 @@ class Register extends React.Component {
                                 type="submit"
                                 value="Register" />
                         </div>
-                        {/* <div className="lh-copy mt3">
-                        <a onClick={() => onRouteChange('signin')} href="#0" className="f6 link dim black db">Sign In</a>
-                    </div> */}
                     </div>
                 </main>
             </article>
